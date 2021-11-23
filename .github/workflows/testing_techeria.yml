@@ -9,7 +9,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql-latest
+        image: root
         env:
           PHP_USER: root
           PHP_PASSWORD: f1234

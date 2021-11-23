@@ -11,10 +11,9 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          DB_DATABASE: techeria_db
-          DB_HOST: 127.0.0.1
-          DB_USER: root
-          DB_PASSWORD: root
+          PHP_USER: root
+          PHP_PASSWORD: f1234
+          PHP_DB: github_actions
         ports:
           - 3306
     steps:

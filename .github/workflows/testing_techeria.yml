@@ -22,25 +22,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      # - name: Verify MySQL connection
-      #   run: |
-      #     mysql --version
-      #     sudo apt-get install -y mysql-client
-      #     mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uuser -psecret -e "SHOW DATABASES"
-      # - name: Cache composer dependencies
-      #   uses: actions/cache@v1
-      #   with:
-      #     path: vendor
-      #     key: composer-${{ hashFiles('composer.lock') }}
-
-      - name: Install dependencies
-        run: |
-          php --version
-          composer config "http-basic.nova.laravel.com" "${{ secrets.DB_USER }}" "${{ secrets.DB_PASSWORD }}"
-          composer install -n --prefer-dist
-
-
-      - name: Run tests
-        run: ./vendor/bin/phpunit -v
-        env:
-            DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+    

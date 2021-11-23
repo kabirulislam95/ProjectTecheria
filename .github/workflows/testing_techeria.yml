@@ -1,59 +1,41 @@
 name: Tests
+
 on: [push]
+
 jobs:
   tests:
     name: Run tests
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+        DB_DATABASE: techeria_db
+        DB_HOST: 127.0.0.1
+        DB_USER: root
+        DB_PASSWORD: f1234
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - uses: actions/checkout@v1
 
+      - name: Verify MySQL connection
+        run: |
+          mysql --version
+          sudo apt-get install -y mysql-client
+          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uuser -psecret -e "SHOW DATABASES"
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
 
-	services:
-		mysql:
-			image:  mysql:5.7
-			env:
-				DB_DATABASE: techeria_db
-				DB_HOST: 127.0.0.1
-				DB_USER: root
-				DB_PASSWORD: f1234
-
-			ports:
-			- 33306:3306
-
-			options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
-	- name: Verify MySQL connection
-		run: |
-			mysql --version
-			sudo apt-get install -y mysql-client
-			mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uuser -psecret -e "SHOW DATABASES"
-
-
-	 steps:
-		- uses: actions/checkout@v2
-		- name: Set up Python 3.8.6
-		  uses: actions/setup-python@v2
-		  with:
-			python-version: 3.8.6
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run ProjectTecheria
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        DEBUG:  ${{ secrets.DEBUG }}
-        DB_USER: root
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_ENGINE: ${{ secrets.DB_ENGINE }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_HOST:  ${{ secrets.DB_HOST }}
-        DB_PORT: ${{ secrets.DB_PORT }}
-
-
-
-
-      run: |
-        cd ./techeria_controller
-        python manage.py test
+      - name: Install dependencies
+        run: |
+          php --version
+          composer config "http://localhost/phpmyadmin/index.php?route=/database/structure&server=1&db=techeria_db" "${{ secrets.DB_USER }}" "${{ secrets.DB_PASSWORD }}"
+          composer install -n --prefer-dist
+      -

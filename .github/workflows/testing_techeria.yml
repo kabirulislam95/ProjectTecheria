@@ -18,6 +18,26 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    database:
+        - mysql:5.7
+        - mysql:8.0
+        - mariadb:10.2
+        - mariadb:10.3
+        - mariadb:10.4
+        - mariadb:10.5
+        - mariadb:10.6
+
+    services:
+      database:
+        image: ${{ matrix.database }}
+        env:
+          MYSQL_ROOT_PASSWORD: f1234
+        ports:
+        - 3306:3306
+        options: --tmpfs /var/lib/mysql
+
+
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8.6

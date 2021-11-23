@@ -83,7 +83,6 @@ DATABASES = {
         'NAME': 'techeria_db',
         'USER': 'root',
         'HOST': 'localhost',
-        'bind-address':127.0.0.1,
         'PORT': 3306,
         'PASSWORD': 'f1234',
         'TEST': {

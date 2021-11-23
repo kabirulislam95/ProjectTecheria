@@ -32,12 +32,14 @@ jobs:
     - name: Open ProjectTecheria
       run: |
         cd ./techeria_controller
-      
+
     - name: Coverage report
       run: |
         pip install coverage
+        cd ./techeria_controller
         coverage run manage.py test
         coverage report
     - name: Django Testing
       run: |
+        cd ./techeria_controller
         python3 manage.py test

@@ -17,7 +17,7 @@ jobs:
           DB_PASSWORD: f1234
         ports:
           - 33306:3306
-        
+
 
     steps:
       - uses: actions/checkout@v1
@@ -38,3 +38,9 @@ jobs:
           php --version
           composer config "http-basic.nova.laravel.com" "${{ secrets.DB_USER }}" "${{ secrets.DB_PASSWORD }}"
           composer install -n --prefer-dist
+
+
+      - name: Run tests
+        run: ./vendor/bin/phpunit -v
+          env:
+            DB_PORT: ${{ job.services.mysql.ports['3306'] }}

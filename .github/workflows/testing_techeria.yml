@@ -38,4 +38,4 @@ jobs:
           php --version
           composer config "http-basic.nova.laravel.com" "${{ secrets.DB_USER }}" "${{ secrets.DB_PASSWORD }}"
           composer install -n --prefer-dist
-      -
+      

@@ -33,12 +33,7 @@ jobs:
       run: |
         cd ./techeria_controller
 
-    - name: Coverage report
-      run: |
-        pip install coverage
-        cd ./techeria_controller
-        coverage run manage.py test
-        
+    
     - name: Django Testing
       run: |
         cd ./techeria_controller

@@ -5,8 +5,7 @@ on: [push]
 jobs:
   tests:
     name: Run tests
-    runs-on:
-      ubuntu-latest
+    runs-on: ubuntu-latest
 
     services:
       mysql:
@@ -37,6 +36,6 @@ jobs:
       - name: Install dependencies
         run: |
           php --version
-          composer config "http://localhost/phpmyadmin/index.php?route=/database/structure&server=1&db=techeria_db" "${{ secrets.DB_USER }}" "${{ secrets.DB_PASSWORD }}"
+          composer config "http-basic.nova.laravel.com" "${{ secrets.DB_USER }}" "${{ secrets.DB_PASSWORD }}"
           composer install -n --prefer-dist
-      
+      -

@@ -9,11 +9,11 @@ jobs:
 
     services:
       mysql:
-        image: root
+        image: mysql:5.7
         env:
           PHP_USER: root
           PHP_PASSWORD: f1234
-          PHP_DB: github_actions
+          PHP_DB: techeria_db
         ports:
           - 3306
     steps:

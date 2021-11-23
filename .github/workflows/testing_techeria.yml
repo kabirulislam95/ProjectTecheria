@@ -16,7 +16,7 @@ jobs:
           DB_USER: root
           DB_PASSWORD: f1234
         ports:
-          - 33306:3306
+          - 3306
 
 
     steps:

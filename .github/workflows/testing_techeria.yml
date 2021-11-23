@@ -33,8 +33,10 @@ jobs:
       run: |
         cd ./techeria_controller
 
-    
+
     - name: Django Testing
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
         cd ./techeria_controller
-        python3 manage.py test
+        python manage.py test

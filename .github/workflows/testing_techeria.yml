@@ -31,9 +31,8 @@ jobs:
 
     - name: Open ProjectTecheria
       run: |
-        ls -la
-        cd ./src/techeria_controller
-        ls -la
+        cd ./techeria_controller
+      
     - name: Coverage report
       run: |
         pip install coverage

@@ -27,11 +27,11 @@ jobs:
       #     mysql --version
       #     sudo apt-get install -y mysql-client
       #     mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uuser -psecret -e "SHOW DATABASES"
-      - name: Cache composer dependencies
-        uses: actions/cache@v1
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
+      # - name: Cache composer dependencies
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: vendor
+      #     key: composer-${{ hashFiles('composer.lock') }}
 
       - name: Install dependencies
         run: |

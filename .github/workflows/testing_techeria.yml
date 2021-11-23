@@ -42,5 +42,5 @@ jobs:
 
       - name: Run tests
         run: ./vendor/bin/phpunit -v
-          env:
+        env:
             DB_PORT: ${{ job.services.mysql.ports['3306'] }}

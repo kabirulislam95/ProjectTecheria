@@ -19,9 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      database:
-        image: ${{ matrix.database }}
-        env:
+      env:
           MYSQL_ROOT_PASSWORD: f1234
         ports:
         - 3306:3306

@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'techeria_db',
         'USER': 'root',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1:8000',
         'PORT': 3306,
         'PASSWORD': 'f1234',
         'TEST': {

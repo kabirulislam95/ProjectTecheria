@@ -17,6 +17,10 @@ jobs:
   php:
 
     runs-on: ubuntu-latest
+    env:
+      PHP_VERSION: 7.4
+      NODE_VERSION: 10.x
+      COMPOSER_ALLOW_SUPERUSER: '1' # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 
     services:
       mysql:

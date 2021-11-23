@@ -22,12 +22,15 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_USER: root
-          MYSQL_ROOT_PASSWORD: f1234
-        ports:
-        - 3306:3306
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+          DB_DATABASE: techeria_db
+          DB_USER: root
+          DB_PASSWORD: f1234
 
+      steps:
+        - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
 
     steps:
